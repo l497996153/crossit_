@@ -1,0 +1,72 @@
+@import url("theme.css");
+
+#sceneDiv {
+  text-align: center;
+  margin: 50px;
+}
+
+/*----------------------------Profile image CSS----------------------------*/
+/*Make the form grided*/
+#gridContainer {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: auto auto;
+}
+
+/*Set up profile picture division*/
+#profImg {
+  height: 100px;
+  width: 100px;
+}
+
+#imgFSet {
+  text-align: right;
+  border: none;
+}
+
+/*----------------------------Profile Text CSS----------------------------*/
+/*Set up profile text division*/
+#textFSet {
+  text-align: left;
+  border: none;
+}
+
+ul#textFDivList {
+  list-style-type: none;
+}
+
+li {
+  padding: 2px;
+}
+
+.txtClass {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ma-blue);
+}
+
+div#bioDiv {
+  float: none;
+}
+
+#saveDiv {
+  margin: 5px;
+  float: right;
+}
+
+/*Make the bio-textare un-resizable*/
+textarea {
+  resize: none;
+  width: 50%;
+  height: 25%;
+}
+
+.bioC {
+  margin-top: 10px;
+}
+
+#btDiv {
+  display: flex;
+  align-items: left;
+}

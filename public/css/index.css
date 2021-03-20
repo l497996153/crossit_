@@ -1,0 +1,41 @@
+@import url("theme.css");
+.outCont {
+  display: flex;
+}
+.card {
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.6);
+  transition: 0.3s;
+  width: 20%;
+  margin: auto;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cont {
+  padding: 3px 25px;
+}
+
+#aboutDiv {
+  display: flex;
+  margin: 10px;
+}
+.about {
+  margin: auto;
+  font-size: 20px;
+  font-weight: bolder;
+  width: 45%;
+  text-align: justify;
+}
+.about::first-letter {
+  font-size: 300%;
+  color: var(--rose-madder);
+}
+
+.loginLogo {
+  display: flex;
+  margin: auto;
+  width: 15%;
+  height: 15%;
+}

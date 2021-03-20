@@ -1,0 +1,58 @@
+:root {
+  --ma-blue: #011627;
+  --ba-powder: #fdfffc;
+  --max-green: #2ec4b6;
+  --rose-madder: #e71d36;
+  --br-crayola: #ff9f1c;
+  --th-font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-family: var(--th-font-family);
+}
+body {
+  background-image: url("../img/repeated-square.png");
+}
+
+legend {
+  font-size: 150%;
+  font-family: fantasy;
+}
+
+input[type="submit"] {
+  font-weight: bolder;
+  background-color: var(--rose-madder);
+  color: var(--ba-powder);
+  border: none;
+  width: 100px;
+  height: 33px;
+}
+
+button#signup {
+  font-weight: bolder;
+  background-color: var(--max-green);
+  color: var(--ba-powder);
+  border: none;
+  width: 100px;
+  height: 33px;
+}
+a:link {
+  color: var(--ma-blue);
+}
+a:visited {
+  color: var(--max-green);
+}
+
+header#cross {
+  text-align: center;
+  font-size: 4.5cm;
+  font-weight: bolder;
+  color: var(--ba-powder);
+  text-shadow: 2px 3px 4px var(--rose-madder);
+}
+
+#tSpan {
+  display: inline-block;
+  transform: rotate(45deg);
+  size: 120%;
+}
