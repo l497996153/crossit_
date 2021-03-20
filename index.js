@@ -295,3 +295,6 @@ function getSides(body) {
 
     return sides;
 }
+
+.get('/yinghong', (req, res) => res.render('pages/yinghong'))
+.get('/zhaolong', (req, res) => res.render('pages/zhaolong'))
