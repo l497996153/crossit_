@@ -1,14 +1,3 @@
-## Final Project Base Project
+# Crossit 
 
-This repo contains a good starting place for getting a static website running on Heroku.
-
-# Steps for turning this repo into a Heroku-Hosted Website
-
-1. Log in to the github.com using your account information
-2. Open https://github.com/ftPeter/web-programming-final-project-base in a web browser
-3. Click the *fork* button and create a fork local to your own account
-4. git clone your new fork of the project and cd into that directory
-5. heroku create 
-6. git push heroku master
-7. heroku open /
-
+Crossit is a web-based task management system that facilitates keeping track of TO-DOS for all users. Users can create, update, share, checkoff lists of tasks for their to-dos. The list's sharable option facilitates team projects and grants permission for team members to edit the task on the list.
