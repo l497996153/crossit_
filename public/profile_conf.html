@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile configuration</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/cross.svg" />
+    <link rel="stylesheet" href="css/profile.css" />
+  </head>
+  <body>
+    <form method="POST" id="sceneDiv">
+      <div id="gridContainer">
+        <fieldset id="imgFSet">
+          <div id="imgFSDiv">
+            <legend>Profile image</legend>
+            <!-- TODO: Add JS to display img from-->
+            <img id="profImg" alt="profile image" src="img/sample.png" />
+            <br />
+            <br />
+
+            <label for="changeImg">Image change</label><br />
+            <input type="file" name="img" id="changeImg" accept="image/*" />
+          </div>
+        </fieldset>
+
+        <fieldset id="textFSet">
+          <ul id="textFDivList">
+            <li>
+              <label for="username">Username:</label><br />
+              <input type="text" id="userField" class="txtClass" required />
+            </li>
+            <li>
+              <label for="email">E-mail:</label><br />
+              <input type="email" id="email" class="txtClass" disabled />
+            </li>
+            <li>
+              <label for="nickname">Nickname:</label><br />
+              <input type="text" id="nickname" class="txtClass" />
+            </li>
+            <li>
+              <label for="phoneNum">Phone #:</label><br />
+              <input type="tel" id="phoneNum" class="txtClass" />
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+
+      <div id="bioDiv">
+        <div>
+          <label for="bioText"></label>
+          <textarea
+            name="bioTxtArea"
+            id="bioTxtArea"
+            rows="15"
+            cols="55"
+            placeholder="The person is lazy..."
+            class="bioC"
+          ></textarea>
+        </div>
+        <div>
+          <label for="taskCount">Task Count:</label>
+          <input
+            id="taskCount"
+            name="taskCount"
+            type="text"
+            disabled
+            class="bioC"
+          />
+        </div>
+        <div id="btDiv">
+          <button type="button" class="bioC">
+            <img src="img/change.svg" alt="reset" /><strong
+              >Change Password</strong
+            >
+          </button>
+        </div>
+        <hr />
+      </div>
+      <div id="saveDiv">
+        <!--TODO: Save changed fields-->
+        <input type="submit" value="Save" />
+      </div>
+    </form>
+  </body>
+</html>
