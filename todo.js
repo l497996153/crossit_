@@ -10,6 +10,9 @@ $(document).ready(function(event) {
     $(".addBtn").click(function (event){
         let title = $("#myInput").val();
         $("#todoList").append('<li><span class="delete"></span>'+title+'</li>');
+        $('#todoList li span').click(function(event) {
+            $(this).parent().remove();        
+        });
     });
 
     $(".cancelBtn").click(function (event){
