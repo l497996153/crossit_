@@ -17,5 +17,6 @@ $(document).ready(function(event) {
 
     $(".cancelBtn").click(function (event){
         $(".todoDiv").css("display","none");
+        $(".todoDiv #myInput").val("");
     });
 });
