@@ -53,7 +53,7 @@ aside {
 }
 
 /*----------------------------Footer----------------------------*/
-#addButton {
+#addTask {
   position: -webkit-sticky;
   position: fixed;
   bottom: 0px;
@@ -62,10 +62,64 @@ aside {
   opacity: 0.5;
   transition: 0.3s ease;
 }
-#addButton:hover {
+#addTask:hover {
   opacity: 1;
 }
 
-#todoList > li {
+/*#todoList > li {
   list-style-image: url("../img/cross.svg");
+}*/
+#todoList > li {
+  list-style: none;
+}
+.delete{
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  background-image: url("../img/cross.svg");
+}
+
+.todoDiv {
+  display: none;
+  background-color: #f44336;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+  bottom: 0px;
+  max-width: 300px;
+}
+
+input, .cancelBtn{
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+.todoDiv #cancelBtn {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
 }
