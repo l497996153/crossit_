@@ -4,6 +4,8 @@
     <title>XXX List</title>
     <link href="img/cross.svg" type="image/x-icon" rel="shortcut icon" />
     <link href="css/todo.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../todo.js"></script>
   </head>
   <body>
     <!----------------------------Header---------------------------->
@@ -16,10 +18,10 @@
       <nav id="leftNavigation"></nav>
       <main id="image">
         <ul id="todoList">
-          <li>Grocery</li>
-          <li>Lecture</li>
-          <li>Lab</li>
-          <li>Home</li>
+          <li><span class="delete"></span>Grocery</li>
+          <li><span class="delete"></span>Lecture</li>
+          <li><span class="delete"></span>Lab</li>
+          <li><span class="delete"></span>Home</li>
         </ul>
       </main>
       <aside id="list">
@@ -32,7 +34,13 @@
     <!----------------------------Footer---------------------------->
     <footer id="adder">
       <div id="addDiv">
-        <img src="img/add.svg" alt="add task icon" id="addButton" />
+        <div id="todoDiv" class="todoDiv">
+          <h2>Add To Do</h2>
+          <input type="text" id="myInput" placeholder="Title...">
+          <button type="button" class="addBtn">Add</button>
+          <button type="button" class="cancelBtn">Cancel</button>
+        </div>
+        <img src="img/add.svg" alt="add task icon" id="addTask" />
       </div>
     </footer>
   </body>
