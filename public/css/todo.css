@@ -18,6 +18,11 @@ header {
   opacity: 1;
 }
 
+.dropdown-menu{
+  display: none;
+  top: 50px;
+}
+
 #container {
   display: flex;
   align-items: stretch;

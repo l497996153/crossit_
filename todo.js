@@ -1,4 +1,13 @@
 $(document).ready(function(event) {
+    $("#menuButton").click(function (event){
+        if($(".dropdown-menu").is(':visible')){
+            $(".dropdown-menu").css("display","none");
+        }
+        else{
+            $(".dropdown-menu").css("display","block");
+        }
+    });
+
     $('#todoList li span').click(function(event) {
         $(this).parent().remove();        
     });
