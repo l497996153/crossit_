@@ -22,13 +22,13 @@ app
       }
       else{
         console.log("username or password wrong");
-        console.log(username + "  " + password);
+        alert(username + "  " + password);
         return res.sendStatus(400);
       }
     }
     else{
       console.log("not valid username or password");
-      console.log(username + "  " + password);
+      alert(username + "  " + password);
       return res.sendStatus(400);
     }
   })
