@@ -17,17 +17,18 @@ app
     if (validateLogin(username, password)) {
       if(username=="admin" && password =="pass"){
         //actually need to connect to database which I would build afterward.
+        let user_info = {username: username, password: password};
         console.log(username + "successfully login");
-        res.render('pages/profile_conf');
+        res.render('pages/todo', user_info);
       }
       else{
         console.log("username or password wrong");
-        return res.sendStatus(400);
+        res.redirect("/login");
       }
     }
     else{
       console.log("not valid username or password");
-      return res.sendStatus(400);
+      res.redirect("/login");
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
