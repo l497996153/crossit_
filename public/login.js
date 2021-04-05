@@ -10,6 +10,8 @@ $(document).ready(function(event) {
     });
     // Validation for customer name
     $("#username, #password").keyup(function () {
+        $("#error").val("Please enter username and password!");
+        $("#error").hide();
         validateName();
     });
     function validateName() {

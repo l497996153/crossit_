@@ -20,16 +20,16 @@ app
         //actually need to connect to database which I would build afterward.
         let user_info = {username: username, password: password};
         console.log(username + "successfully login");
-        res.render('pages/todo', user_info);
+        res.render('pages/profile_conf', user_info);
       }
       else{
         console.log("username or password wrong");
-        res.render('pages/login', user_info);
+        res.render('pages/login_fail', user_info);
       }
     }
     else{
       console.log("not valid username or password");
-      res.render('pages/login', user_info);
+      res.render('pages/login_fail', user_info);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
