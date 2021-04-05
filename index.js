@@ -13,7 +13,8 @@ app
     else{
       res.render('public/index');
     }
-  });
+  })
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
 function validateLogin(username, password) {
