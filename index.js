@@ -24,12 +24,12 @@ app
       }
       else{
         console.log("username or password wrong");
-        res.redirect("public/login");
+        res.render('pages/login', user_info);
       }
     }
     else{
       console.log("not valid username or password");
-      res.redirect("public/login");
+      res.render('pages/login', user_info);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
