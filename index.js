@@ -4,7 +4,7 @@ const path = require("path");
 const PORT = process.env.PORT || 5000;
 
 app
-  .post("/confirm", async (req, res) => {
+  .post("/login", async (req, res) => {
     const username = (req.query.username) ? req.query.username : "";
     const password = (req.query.password) ? req.query.password : "";
     if (validateLogin(username, password)) {
