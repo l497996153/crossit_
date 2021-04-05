@@ -1,7 +1,7 @@
 $(document).ready(function(event) {
     let validate = false;
     let rtnError = false;
-    if($("#error").val() == "Please enter username and password!"){
+    if($("#error").text() == "Please enter username and password!"){
         $("#error").hide();
     }else{
         rtnError = true;

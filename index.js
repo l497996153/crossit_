@@ -14,13 +14,12 @@ app
   .post("/login", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    console.log(username + " " +password);
     if (validateLogin(username, password)) {
       if(username=="admin" && password =="pass"){
         //actually need to connect to database which I would build afterward.
         let user_info = {username: username, password: password};
         console.log(username + "successfully login");
-        res.render('pages/profile_conf', user_info);
+        res.render('pages/todo', user_info);
       }
       else{
         let error = {error: "username or password wrong"};
@@ -32,6 +31,28 @@ app
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
       res.render('pages/login_fail',error);
+    }
+  })
+  .post("/signUp", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    if (validateLogin(username, password)) {
+      if(username!="admin"){
+        //actually need to connect to database which I would build afterward.
+        let user_info = {username: username, password: password};
+        console.log(username + "successfully sign up");
+        res.render('pages/todo', user_info);
+      }
+      else{
+        let error = {error: "username is used"};
+        console.log("username is used");
+        res.render('pages/signup_fail',error);
+      }
+    }
+    else{
+      let error = {error: "not valid username or password"};
+      console.log("not valid username or password");
+      res.render('pages/signup_fail',error);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
