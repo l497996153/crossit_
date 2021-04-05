@@ -8,6 +8,10 @@ app
   .use(express.static(path.join(__dirname, 'JS')))
   .use(express.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+  })
   .post("/login", async (req, res) => {
     const username = (req.query.username) ? req.query.username : "";
     const password = (req.query.password) ? req.query.password : "";
