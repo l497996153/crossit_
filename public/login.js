@@ -1,6 +1,11 @@
 $(document).ready(function(event) {
     let validate = false;
-    $("#error").hide();
+    let rtnError = false;
+    if($("#error").text() == "Please enter username and password!"){
+        $("#error").hide();
+    }else{
+        rtnError = true;
+    }
     // Submitt button
     $("#subButton").click(function (event) {
         if (validate == false){
@@ -10,6 +15,11 @@ $(document).ready(function(event) {
     });
     // Validation for customer name
     $("#username, #password").keyup(function () {
+        if(rtnError){
+            $("#error").val("Please enter username and password!");
+            rtnError = false;
+        }
+        $("#error").hide();
         validateName();
     });
     function validateName() {
