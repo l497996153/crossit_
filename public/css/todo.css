@@ -13,16 +13,73 @@ header {
   height: 100px;
   opacity: 0.5;
   transition: 0.5s ease;
+  cursor: pointer;
+  z-index: 999;
 }
 #menuButton:hover {
   opacity: 1;
 }
 
-.dropdown-menu{
-  display: none;
-  top: 50px;
+/*-------------Todo list starts------*/
+/* Each item inside the todo list */
+#todoList > li {
+  font-size: x-large;
+  list-style: none;
+  border: solid var(--max-green);
+  margin: 2px;
+  width: 75%;
+  font-weight: bold;
 }
 
+/* The span element inside
+ each item of todo list*/
+.delete {
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  background-image: url("../img/cross.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.delete:hover {
+  opacity: 1;
+}
+
+/*-------------Miscellaneous------*/
+.dropdown-menu {
+  position: -webkit-sticky;
+  position: fixed;
+  background-color: var(--ba-powder);
+  top: 0px;
+  width: 20%;
+  padding-top: 130px;
+  display: block;
+  opacity: 0.7;
+  font-size: large;
+  text-align: center;
+  display: none;
+}
+
+#dLists {
+  list-style: none;
+  text-align: left;
+}
+#dLists > li {
+  margin-bottom: 5px;
+}
+
+.dropdown-menu > .newList {
+  border: none;
+  background-color: var(--ma-blue);
+  color: var(--ba-powder);
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+}
+/*-------------Miscellaneous------*/
 #container {
   display: flex;
   align-items: stretch;
@@ -58,6 +115,8 @@ aside {
 }
 
 /*----------------------------Footer----------------------------*/
+
+/*----------Add task button----------*/
 #addTask {
   position: -webkit-sticky;
   position: fixed;
@@ -66,35 +125,27 @@ aside {
   height: 100px;
   opacity: 0.5;
   transition: 0.3s ease;
+  cursor: pointer;
 }
 #addTask:hover {
   opacity: 1;
 }
 
-/*#todoList > li {
-  list-style-image: url("../img/cross.svg");
-}*/
-#todoList > li {
-  list-style: none;
-}
-.delete{
-  height: 40px;
-  width: 40px;
-  display: inline-block;
-  background-image: url("../img/cross.svg");
-}
-
+/*----------Add task window----------*/
 .todoDiv {
   display: none;
-  background-color: #f44336;
+  background-color: rgb(255, 159, 28, 0.4);
   padding: 30px 40px;
   color: white;
   text-align: center;
   bottom: 0px;
   max-width: 300px;
+  position: -webkit-sticky;
+  position: fixed;
 }
 
-input, .cancelBtn{
+input,
+.cancelBtn {
   margin: 0;
   border: none;
   border-radius: 0;
@@ -102,16 +153,24 @@ input, .cancelBtn{
   padding: 10px;
   float: left;
   font-size: 16px;
+  font-weight: bold;
+}
+.cancelBtn {
+  background-color: var(--rose-madder);
+  cursor: pointer;
+  color: var(--ba-powder);
 }
 
 .addBtn {
   padding: 10px;
   width: 25%;
-  background: #d9d9d9;
-  color: #555;
+  background: var(--ma-blue);
+  color: var(--ba-powder);
   float: left;
   text-align: center;
   font-size: 16px;
+  font-weight: bold;
+  border: none;
   cursor: pointer;
   transition: 0.3s;
   border-radius: 0;
