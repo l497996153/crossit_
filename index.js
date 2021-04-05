@@ -21,10 +21,12 @@ app
         res.render('pages/profile_conf');
       }
       else{
+        console.log("username or password wrong")
         return res.sendStatus(400);
       }
     }
     else{
+      console.log("not valid username or password")
       return res.sendStatus(400);
     }
   })
