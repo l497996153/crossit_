@@ -12,10 +12,16 @@ app
     const username = (req.query.username) ? req.query.username : "";
     const password = (req.query.password) ? req.query.password : "";
     if (validateLogin(username, password)) {
-      res.render('public/profile_conf');
+      if(username=="admin" && password =="pass"){
+        //actually need to connect to database which I would build afterward.
+        res.render('pages/profile_conf');
+      }
+      else{
+        return res.sendStatus(400);
+      }
     }
     else{
-      res.render('public/index');
+      return res.sendStatus(400);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
