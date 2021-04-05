@@ -14,6 +14,7 @@ app
   .post("/login", async (req, res) => {
     const username = (req.query.username) ? req.query.username : "";
     const password = (req.query.password) ? req.query.password : "";
+    console.log(username + " " +password);
     if (validateLogin(username, password)) {
       if(username=="admin" && password =="pass"){
         //actually need to connect to database which I would build afterward.
@@ -23,12 +24,12 @@ app
       }
       else{
         console.log("username or password wrong");
-        res.redirect("/login");
+        res.redirect("public/login");
       }
     }
     else{
       console.log("not valid username or password");
-      res.redirect("/login");
+      res.redirect("public/login");
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
