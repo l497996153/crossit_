@@ -5,7 +5,6 @@ const PORT = process.env.PORT || 5000;
 
 app
   .use(express.static(path.join(__dirname, 'public')))
-  .use(express.static(path.join(__dirname, 'JS')))
   .use(express.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
