@@ -23,13 +23,15 @@ app
         res.render('pages/profile_conf', user_info);
       }
       else{
+        let error = {error: "username or password wrong"};
         console.log("username or password wrong");
-        res.render('pages/login_fail', user_info);
+        res.render('pages/login_fail',error);
       }
     }
     else{
+      let error = {error: "not valid username or password"};
       console.log("not valid username or password");
-      res.render('pages/login_fail', user_info);
+      res.render('pages/login_fail',error);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
