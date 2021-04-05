@@ -8,7 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="nav.js"></script>
     <script src="login.js"></script>
-    <script>$("#error").show();</script>
   </head>
   <body>
     <header id="cross">CrossI<span id="tSpan">t</span></header>
@@ -22,13 +21,14 @@
             id="username"
             name="username"
             class="cred"
-            placeholder=“Username or E-mail“>
+            placeholder="Username or E-mail"
           />
           <br />
           <label for="password">Password&nbsp;:</label>
           <input type="password" id="password" name="password" class="cred" />
           <br />
           <label id="error">"<%= error %>"</label>
+          <script defer>$("#error").show();</script>
           <br />
           <input type="submit" id="subButton" value="Sign in" />
         </div>
