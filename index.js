@@ -18,17 +18,16 @@ app
     if (validateLogin(username, password)) {
       if(username=="admin" && password =="pass"){
         //actually need to connect to database which I would build afterward.
+        console.log(username + "successfully login");
         res.render('pages/profile_conf');
       }
       else{
         console.log("username or password wrong");
-        alert(username + "  " + password);
         return res.sendStatus(400);
       }
     }
     else{
       console.log("not valid username or password");
-      alert(username + "  " + password);
       return res.sendStatus(400);
     }
   })
