@@ -65,7 +65,7 @@ app
         const client = await pool.connect()
         client.query("CREATE TABLE IF NOT EXISTS Users (username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
-                                                       "PRIMARY KEY(id));")
+                                                       "PRIMARY KEY(username));")
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
