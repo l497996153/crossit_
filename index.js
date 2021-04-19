@@ -44,25 +44,30 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
-      client.connect();
-      cclient.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
-        if (err) throw err;
-        if(!result.length){
-          client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err) {
-            if (err) throw err;
-            console.log("user sign up");
-          });
-          let user_info = {username: username, password: password};
-          res.render('pages/todo', user_info);
-          connection.end();
-        }
-        else{
-          let error = {error: "username is used"};
-          console.log("username is used");
-          res.render('pages/signup_fail',error);
-          connection.end();
-        }
-      });
+      try {
+        client.connect();
+        cclient.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
+          if (err) throw err;
+          if(!result.length){
+            client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err, result) {
+              if (err) throw err;
+              console.log("user sign up");
+            });
+            let user_info = {username: username, password: password};
+            res.render('pages/todo', user_info);
+            connection.end();
+          }
+          else{
+            let error = {error: "username is used"};
+            console.log("username is used");
+            res.render('pages/signup_fail',error);
+            connection.end();
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        res.send(err);
+      }
       /*if(username!="admin"){
         //actually need to connect to database which I would build afterward.
         let user_info = {username: username, password: password};
