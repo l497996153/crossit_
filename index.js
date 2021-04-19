@@ -67,10 +67,13 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect();
-        const result = client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
+        const result = () => client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
           if (err) throw err;
+          if(result.length != 0){
+            return true;
+          }
         });
-        if(result.length != 0){
+        if(result){
           client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
           let user_info = {username: username, password: password};
           res.render('pages/todo', user_info);
