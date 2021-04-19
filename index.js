@@ -20,13 +20,11 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
-      log("true");
       /*try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
-                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
+        client.query("CREATE TABLE IF NOT EXISTS Users (username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
-                                                       "PRIMARY KEY(id));")
+                                                       "PRIMARY KEY(username));")
         client.query('SELECT * FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
@@ -75,13 +73,11 @@ app
             });*/
             let user_info = {username: username, password: password};
             res.render('pages/todo', user_info);
-            connection.end();
           }
           else{
             let error = {error: "username is used"};
             console.log("username is used");
             res.render('pages/signup_fail',error);
-            connection.end();
           }
         });
       } catch (err) {
