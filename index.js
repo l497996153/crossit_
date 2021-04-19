@@ -20,7 +20,8 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
-      try {
+      log("true");
+      /*try {
         const client = await pool.connect()
         client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
                                                        "username VARCHAR(15) NOT NULL UNIQUE,"+
@@ -30,25 +31,25 @@ app
           if (err) throw err;
           if(!result.length){
             if(password == result.rows[0].password){
-              let user_info = {username: result.rows[0].username, password: result.rows[0].password};
+              let user_info = {username: username, password: password};
               console.log(username + "successfully login");
               res.render('pages/todo', user_info);
             }else{
-              let error = {error: "username or password wrong"};
+              let error = {error: 'username or password wrong'};
               console.log("username or password wrong");
               res.render('pages/login_fail',error);
             }
           }
           else{
             let error = {error: "username or password wrong"};
-            console.log("username or password wrong");
+            console.log('username or password wrong');
             res.render('pages/login_fail',error);
           }
         });
       } catch (err) {
         console.error(err);
         res.send("Error " + err);
-      }
+      }*/
     }
     else{
       let error = {error: "not valid username or password"};
@@ -71,7 +72,7 @@ app
           if(!result.length){
             const rs = client.query("SELECT COUNT(*) AS total FROM Users;");
             let id = rs.rows[0].total + 1;
-            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
+            client.query("INSERT INTO Users VALUES ("+id+",'"+username+"','"+password+"');");
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
