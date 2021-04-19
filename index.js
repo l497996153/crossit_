@@ -2,8 +2,8 @@ const express = require("express");
 const app = express(); 
 const path = require("path");
 const PORT = process.env.PORT || 5000;
-const { Pool } = require("pg");
-const pool = new Pool({
+const { Client } = require("pg");
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -45,7 +45,7 @@ app
     const password = req.body.password;
     if (validateLogin(username, password)) {
       try {
-        const client = await pool.connect();
+        client.connect();
         client.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
                                                        "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
@@ -56,6 +56,7 @@ app
             alert("test");
           }
         });*/
+        client.end();
       } catch (err) {
         console.error(err);
         res.send(err);
