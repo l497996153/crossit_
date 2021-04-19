@@ -72,7 +72,8 @@ app
           if(!result.length){
             const rs = client.query("SELECT COUNT(*) AS total FROM Users;");
             let id = rs.rows[0].total + 1;
-            client.query("INSERT INTO Users VALUES ("+id+",'"+username+"','"+password+"');");
+            console.log(id);
+            //client.query("INSERT INTO Users VALUES ("+id+",'"+username+"','"+password+"');");
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
@@ -85,28 +86,13 @@ app
         });
       } catch (err) {
         console.error(err);
-        res.send("Error " + err);
+        res.send(err);
       }
     }
     else{
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
       res.render('pages/signup_fail',error);
-    }
-  })
-  .get('/db', async(req, res) => {
-    try {
-      const client = await pool.connect()
-      client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
-                                                     "username VARCHAR(15) NOT NULL,"+
-                                                     "password VARCHAR(15) NOT NULL," +
-                                                     "PRIMARY KEY(id));")
-      client.query("INSERT INTO Users VALUES (1,'admin','pass');");
-      const result = await client.query('SELECT * FROM Users');
-      res.send(result.rows[0].name)
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
