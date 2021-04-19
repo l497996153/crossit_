@@ -63,16 +63,14 @@ app
     if (validateLogin(username, password)) {
       try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
                                                        "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));")
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
-            const rs = await client.query("SELECT COUNT(*) AS total FROM Users;");
-            let id = rs[0].rows[0].total + 1;
-            client.query("INSERT INTO Users VALUES ("+id+",'"+username+"','"+password+"');");
+            client.query("INSERT INTO Users (username,password) VALUES ('"+username+"','"+password+"');");
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
