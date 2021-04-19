@@ -51,8 +51,8 @@ app
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
-            const result = await client.query("SELECT COUNT(*) AS total FROM cases;");
-            let id = result.rows[0].total;
+            const rs = await client.query("SELECT COUNT(*) AS total FROM cases;");
+            let id = rs.rows[0].total;
             id +=1;
             client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
             let user_info = {username: username, password: password};
