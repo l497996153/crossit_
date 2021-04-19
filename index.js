@@ -28,15 +28,15 @@ app
           if (err) throw err;
           if(result.length != 0){
             let user_info = {username: result.rows[0].username, password: result.rows[0].password};
-            console.log(result.rows[0].username + "successfully login");
+            console.log(result.rows[0].username + " successfully login");
             res.render('pages/todo', user_info);
-            connection.end();
+            client.end();
           }
           else{
             let error = {error: "username or password wrong"};
             console.log('username or password wrong');
             res.render('pages/login_fail',error);
-            connection.end();
+            client.end();
           }
         });
       } catch (err) {
@@ -76,13 +76,13 @@ app
             });
             let user_info = {username: username, password: password};
             res.render('pages/todo', user_info);
-            connection.end();
+            client.end();
           }
           else{
             let error = {error: "username is used"};
             console.log("username is used");
             res.render('pages/signup_fail',error);
-            connection.end();
+            client.end();
           }
         });
       } catch (err) {
