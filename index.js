@@ -68,7 +68,7 @@ app
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));")
         alert("here0")
-        client.query('SELECT username FROM users WHERE username = ' + username + ';', function (err, result) {
+        client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
           if (err) throw err;
           if(!result.length){
             alert("here1")
