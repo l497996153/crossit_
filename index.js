@@ -31,16 +31,19 @@ app
               let user_info = {username: username, password: password};
               console.log(username + "successfully login");
               res.render('pages/todo', user_info);
+              connection.end();
             }else{
               let error = {error: 'username or password wrong'};
               console.log("username or password wrong");
               res.render('pages/login_fail',error);
+              connection.end();
             }
           }
           else{
             let error = {error: "username or password wrong"};
             console.log('username or password wrong');
             res.render('pages/login_fail',error);
+            connection.end();
           }
         });
       } catch (err) {
