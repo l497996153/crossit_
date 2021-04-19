@@ -2,6 +2,11 @@ const express = require("express");
 const app = express(); 
 const path = require("path");
 const PORT = process.env.PORT || 5000;
+const {Pool} = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
 
 app
   .use(express.static(path.join(__dirname, 'public')))
@@ -53,6 +58,21 @@ app
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
       res.render('pages/signup_fail',error);
+    }
+  })
+  .get('/db', async(req, res) => {
+    try {
+      const client = await pool.connect()
+      client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+                                                     "username VARCHAR(15) NOT NULL,"+
+                                                     "password VARCHAR(15) NOT NULL," +
+                                                     "PRIMARY KEY(id));")
+      client.query("INSERT INTO Users VALUES (1,'b','a');");
+      const result = await client.query('SELECT * FROM Users');
+      res.send(result.rows[0].name)
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
