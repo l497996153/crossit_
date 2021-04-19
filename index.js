@@ -67,24 +67,21 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect();
-        client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
+        const result = client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
           if (err) throw err;
-          if(result.length != 0){
-            client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err) {
-              if (err) throw err;
-              console.log("user sign up");
-            });
-            let user_info = {username: username, password: password};
-            res.render('pages/todo', user_info);
-            client.end();
-          }
-          else{
-            let error = {error: "username is used"};
-            console.log("username is used");
-            res.render('pages/signup_fail',error);
-            client.end();
-          }
         });
+        if(result.length != 0){
+          client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
+          let user_info = {username: username, password: password};
+          res.render('pages/todo', user_info);
+          client.end();
+        }
+        else{
+          let error = {error: "username is used"};
+          console.log("username is used");
+          res.render('pages/signup_fail',error);
+          client.end();
+        }
       } catch (err) {
         console.error(err);
         res.send("Error " + err);
