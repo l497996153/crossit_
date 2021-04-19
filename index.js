@@ -42,16 +42,29 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
-      if(username!="admin"){
-        //actually need to connect to database which I would build afterward.
-        let user_info = {username: username, password: password};
-        console.log(username + "successfully sign up");
-        res.render('pages/todo', user_info);
-      }
-      else{
-        let error = {error: "username is used"};
-        console.log("username is used");
-        res.render('pages/signup_fail',error);
+      try {
+        const client = await pool.connect()
+        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+                                                       "username VARCHAR(15) NOT NULL,"+
+                                                       "password VARCHAR(15) NOT NULL," +
+                                                       "PRIMARY KEY(id));")
+        client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
+          if (err) throw err;
+          if(!result.length){
+            //actually need to connect to database which I would build afterward.
+            let user_info = {username: username, password: password};
+            console.log(username + "successfully sign up");
+            res.render('pages/todo', user_info);
+          }
+          else{
+            let error = {error: "username is used"};
+            console.log("username is used");
+            res.render('pages/signup_fail',error);
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
       }
     }
     else{
@@ -67,7 +80,7 @@ app
                                                      "username VARCHAR(15) NOT NULL,"+
                                                      "password VARCHAR(15) NOT NULL," +
                                                      "PRIMARY KEY(id));")
-      client.query("INSERT INTO Users VALUES (1,'b','a');");
+      client.query("INSERT INTO Users VALUES (1,'admin','pass');");
       const result = await client.query('SELECT * FROM Users');
       res.send(result.rows[0].name)
     } catch (err) {
