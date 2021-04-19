@@ -22,9 +22,10 @@ app
     if (validateLogin(username, password)) {
       /*try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (username VARCHAR(15) NOT NULL UNIQUE,"+
+        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
-                                                       "PRIMARY KEY(username));")
+                                                       "PRIMARY KEY(id));")
         client.query('SELECT * FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
@@ -61,23 +62,26 @@ app
     if (validateLogin(username, password)) {
       try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (username VARCHAR(15) NOT NULL UNIQUE,"+
+        client.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
+                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
-                                                       "PRIMARY KEY(username));")
-        client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
+                                                       "PRIMARY KEY(id));")
+        client.query('SELECT username FROM users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
-            /*client.query("INSERT INTO Users (username, password) VALUES ('"+username+"','"+password+"');", function (err, result) {
+            client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err, result) {
               if (err) throw err;
               console.log("user sign up");
-            });*/
+            });
             let user_info = {username: username, password: password};
             res.render('pages/todo', user_info);
+            connection.end();
           }
           else{
             let error = {error: "username is used"};
             console.log("username is used");
             res.render('pages/signup_fail',error);
+            connection.end();
           }
         });
       } catch (err) {
