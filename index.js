@@ -79,13 +79,11 @@ app
             });
             let user_info = {username: username, password: password};
             res.render('pages/todo', user_info);
-            connection.end();
           }
           else{
             let error = {error: "username is used"};
             console.log("username is used");
             res.render('pages/signup_fail',error);
-            connection.end();
           }
         });
       } catch (err) {
