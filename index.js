@@ -44,6 +44,22 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
+      try {
+        const client = await pool.connect();
+        client.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
+                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
+                                                       "password VARCHAR(15) NOT NULL," +
+                                                       "PRIMARY KEY(id));");
+        /*client.query('SELECT username FROM users WHERE username = ' + username + ';', function (err, result) {
+          if (err) throw err;
+          if(!result.length){
+            alert("test");
+          }
+        });*/
+      } catch (err) {
+        console.error(err);
+        res.send(err);
+      }
       if(username!="admin"){
         //actually need to connect to database which I would build afterward.
         let user_info = {username: username, password: password};
