@@ -74,7 +74,7 @@ app
           }
         });
         if(result){
-          client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
+          await client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
           let user_info = {username: username, password: password};
           res.render('pages/todo', user_info);
           client.end();
