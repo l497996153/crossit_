@@ -24,7 +24,7 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect()
-        client.query("SELECT * FROM Users WHERE username = '" + username + "';", function (err, result) {
+        client.query("SELECT * FROM users WHERE username = '" + username + "';", function (err, result) {
           if (err) throw err;
           if(result.length != 0){
             if(password == result[0].password){
