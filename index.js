@@ -24,9 +24,9 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect()
-        client.query('SELECT * FROM Users WHERE username = ' + username + ';', function (err, result) {
+        client.query("SELECT * FROM Users WHERE username = '" + username + "';'", function (err, result) {
           if (err) throw err;
-          if(!result.length){
+          if(result.length != 0){
             if(password == result[0].password){
               let user_info = {username: username, password: password};
               console.log(username + "successfully login");
@@ -73,7 +73,7 @@ app
         client.connect();
         client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
           if (err) throw err;
-          if(!result.length){
+          if(result.length != 0){
             client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err) {
               if (err) throw err;
               console.log("user sign up");
@@ -91,7 +91,7 @@ app
         });
       } catch (err) {
         console.error(err);
-        res.send(err);
+        res.send("Error " + err);
       }
       /*if(username!="admin"){
         //actually need to connect to database which I would build afterward.
