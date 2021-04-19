@@ -20,16 +20,34 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
-      if(username=="admin" && password =="pass"){
-        //actually need to connect to database which I would build afterward.
-        let user_info = {username: username, password: password};
-        console.log(username + "successfully login");
-        res.render('pages/todo', user_info);
-      }
-      else{
-        let error = {error: "username or password wrong"};
-        console.log("username or password wrong");
-        res.render('pages/login_fail',error);
+      try {
+        const client = await pool.connect()
+        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
+                                                       "password VARCHAR(15) NOT NULL," +
+                                                       "PRIMARY KEY(id));")
+        client.query('SELECT * FROM Users WHERE username = ' + username + ';', function (err, result) {
+          if (err) throw err;
+          if(!result.length){
+            if(password == result.rows[0].password){
+              let user_info = {username: result.rows[0].username, password: result.rows[0].password};
+              console.log(username + "successfully login");
+              res.render('pages/todo', user_info);
+            }else{
+              let error = {error: "username or password wrong"};
+              console.log("username or password wrong");
+              res.render('pages/login_fail',error);
+            }
+          }
+          else{
+            let error = {error: "username or password wrong"};
+            console.log("username or password wrong");
+            res.render('pages/login_fail',error);
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
       }
     }
     else{
@@ -45,15 +63,15 @@ app
       try {
         const client = await pool.connect()
         client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
-                                                       "username VARCHAR(15) NOT NULL,"+
+                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));")
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
             const rs = client.query("SELECT COUNT(*) AS total FROM Users;");
-            /*let id = rs.rows[0].total + 1;
-            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");*/
+            let id = rs.rows[0].total + 1;
+            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
