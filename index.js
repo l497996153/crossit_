@@ -52,8 +52,8 @@ app
           if (err) throw err;
           if(!result.length){
             const rs = await client.query("SELECT COUNT(*) AS total FROM Users;");
-            let id = rs.rows[0].total + 1;
-            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
+            /*let id = rs.rows[0].total + 1;
+            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");*/
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
