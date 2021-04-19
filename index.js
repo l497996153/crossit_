@@ -52,7 +52,7 @@ app
           if (err) throw err;
           if(!result.length){
             const result = await client.query("SELECT COUNT(*) AS total FROM cases;");
-            id = result.rows[0].total;
+            let id = result.rows[0].total;
             id +=1;
             client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
             let user_info = {username: username, password: password};
