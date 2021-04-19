@@ -51,7 +51,10 @@ app
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
-            //actually need to connect to database which I would build afterward.
+            const result = await client.query("SELECT COUNT(*) AS total FROM cases;");
+            id = result.rows[0].total;
+            id +=1;
+            client.query("INSERT INTO Users VALUES ("+id+",'admin','pass');");
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
