@@ -46,10 +46,10 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect();
-        cclient.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
+        client.query("SELECT username FROM users WHERE username = '" + username + "';", function (err, result) {
           if (err) throw err;
           if(!result.length){
-            client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err, result) {
+            client.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');", function (err) {
               if (err) throw err;
               console.log("user sign up");
             });
