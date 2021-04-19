@@ -46,7 +46,7 @@ app
     if (validateLogin(username, password)) {
       try {
         client.connect();
-        client.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
+        client.query("CREATE TABLE IF NOT EXISTS users (id INT NOT NULL UNIQUE SERIAL," + 
                                                        "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));");
