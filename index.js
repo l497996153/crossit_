@@ -70,7 +70,10 @@ app
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
           if (err) throw err;
           if(!result.length){
-            client.query("INSERT INTO Users (username,password) VALUES ('"+username+"','"+password+"');");
+            client.query("INSERT INTO Users (username,password) VALUES ('"+username+"','"+password+"');", function (err, result) {
+              if (err) throw err;
+              console.log("1 record inserted");
+            });
             let user_info = {username: username, password: password};
             console.log(username + "successfully sign up");
             res.render('pages/todo', user_info);
