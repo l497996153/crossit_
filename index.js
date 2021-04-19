@@ -23,7 +23,7 @@ app
       log("true");
       /*try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE," + 
+        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
                                                        "username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));")
@@ -63,8 +63,7 @@ app
     if (validateLogin(username, password)) {
       try {
         const client = await pool.connect()
-        client.query("CREATE TABLE IF NOT EXISTS Users (id INT NOT NULL UNIQUE AUTO_INCREMENT," + 
-                                                       "username VARCHAR(15) NOT NULL UNIQUE,"+
+        client.query("CREATE TABLE IF NOT EXISTS Users (username VARCHAR(15) NOT NULL UNIQUE,"+
                                                        "password VARCHAR(15) NOT NULL," +
                                                        "PRIMARY KEY(id));")
         client.query('SELECT username FROM Users WHERE username = ' + username + ';', function (err, result) {
