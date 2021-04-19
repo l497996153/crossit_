@@ -23,26 +23,19 @@ app
     const password = req.body.password;
     if (validateLogin(username, password)) {
       client.connect()
-      client.query("SELECT * FROM users WHERE username = '" + username + "';", function (err, result) {
+      client.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
         if (err) throw err;
         if(result.length != 0){
-          if(password == result[0].password){
-            let user_info = {username: username, password: password};
-            console.log(username + "successfully login");
-            res.render('pages/todo', user_info);
-            //connection.end();
-          }else{
-            let error = {error: 'username or password wrong'};
-            console.log("username or password wrong");
-            res.render('pages/login_fail',error);
-            //connection.end();
-          }
+          let user_info = {username: result[0].username, password: result[0].password};
+          console.log(result[0].username + "successfully login");
+          res.render('pages/todo', user_info);
+          connection.end();
         }
         else{
           let error = {error: "username or password wrong"};
           console.log('username or password wrong');
           res.render('pages/login_fail',error);
-          //connection.end();
+          connection.end();
         }
       }).catch(e => console.error(e.stack))
       /*try {
