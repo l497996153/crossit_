@@ -9,6 +9,7 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
+pool.connect()
 
 app
   .use(express.static(path.join(__dirname, 'public')))
@@ -18,12 +19,17 @@ app
   .get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
   })
+  .get('/api/todos/:id', function(req, res) {
+    pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
+      if (err) throw err;
+      res.json(result.rows);
+    });
+  })
   .post("/login", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(username, password)) {
       try {
-        pool.connect()
         pool.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
           if (err) throw err;
           if(result.length != 0){
@@ -53,7 +59,6 @@ app
     const password = req.body.password;
     if (validateLogin(username, password)) {
       try {
-        pool.connect();
         const result = () => pool.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
           if (err) throw err;
           if(result.length != 0){
