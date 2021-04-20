@@ -1,4 +1,16 @@
 $(document).ready(function (event) {
+  getAllTodos();
+  function getAllTodos() {
+      $.get("/api/todos/"+$("#id").val(), function(todos) {
+          let $list = $("#todoList");
+          $list.html("");
+          todos.forEach(function(todo) {
+              $list.append('<li><span class="delete"></span>' + 
+              todo.remind + '</li>')
+          });
+      });
+  }
+  
   $("#menuButton").click(function (event) {
     if ($(".dropdown-menu").is(":visible")) {
       $(".dropdown-menu").css("display", "none");
