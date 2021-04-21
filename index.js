@@ -30,8 +30,6 @@ app
   .get('/api/todos/:id', function(req, res) {
     pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
       if (err) throw err;
-      console.log("id:" + req.params.id);
-      console.log(result.rows);
       if (result == null)
         res.json([]);
       else
@@ -40,15 +38,16 @@ app
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
-    pool.query("INSERT INTO todos (user_id, remind) VALUES ("+todo.id+",'"+todo.remind+"');");
-    res.sendStatus(201);
+    pool.query("INSERT INTO todos (user_id, remind) VALUES ("+todo.id+",'"+todo.remind+"');", function (err) {
+      if (err) throw err;
+      res.sendStatus(201);
+    });
   })
   .delete('/api/todos', function(req, res) {
-    pool.query("DELETE FROM todos WHERE remind = '"+todo.remind+"' AND user_id="+todo.id+";");
-    res.sendStatus(204);
-    /*else{
-      res.sendStatus(404);
-    }*/
+    pool.query("DELETE FROM todos WHERE user_id = "+todo.id+" AND remind = '"+todo.remind+"';", function (err) {
+      if (err) throw err;
+      res.sendStatus(204);
+    });
   })
   .post("/login", async (req, res) => {
     const username = req.body.username;
@@ -83,32 +82,37 @@ app
   .post("/signUp", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    if (validateLogin(username, password)) {
-      try {
-        const result = pool.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
-          if (err) throw err;
-          if(result.length != 0){
-            return true;
-          }
-        });
-        if(result){
-          await pool.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
-          let id = pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
+    if (validateLogin(req.body.username, req.body.password)) {
+      pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err) {
+        if (err) throw err;
+        if(result.length != 0){
+          await pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
+          pool.query("SELECT id FROM users WHERE username = '" + req.body.username + "';", function (err) {
             if (err) throw err;
-            return result.rows[0].id;
+            let user_info = {id: result.rows[0].id, username: req.body.username, password: req.body.password};
+            res.render('pages/todo', user_info);
           });
-          let user_info = {id: id, username: username, password: password};
-          res.render('pages/todo', user_info);
         }
         else{
           let error = {error: "username is used"};
           console.log("username is used");
           res.render('pages/signup_fail',error);
         }
-      } catch (err) {
-        console.error(err);
-        res.send("Error " + err);
+      });
+      /*if(result){
+        await pool.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
+        let id = pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
+          if (err) throw err;
+          return result.rows[0].id;
+        });
+        let user_info = {id: id, username: username, password: password};
+        res.render('pages/todo', user_info);
       }
+      else{
+        let error = {error: "username is used"};
+        console.log("username is used");
+        res.render('pages/signup_fail',error);
+      }*/
     }
     else{
       let error = {error: "not valid username or password"};
