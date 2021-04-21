@@ -1,11 +1,11 @@
 $(document).ready(function (event) {
   getAllTodos();
   function getAllTodos() {
-    let id = $("#user_id").val();
+    let id = $("#user_id").text();
     console.log("id: " + id);
     $.get("/api/todos/"+id, function(todos) {
         let $list = $("#todoList");
-        $list.empty();
+        $list.html("");
         if(todos.length > 0){
           todos.forEach(function(todo) {
               $list.append('<li><span class="delete"></span>' + 
@@ -14,7 +14,7 @@ $(document).ready(function (event) {
           $("#todoList li span").click(function (event) {
             //$(this).parent().remove();
             const todo = {
-              id: $("#user_id").val(),
+              id: $("#user_id").text(),
               remind: $("#myInput").val(),
             };
             $.ajax({
@@ -61,7 +61,7 @@ $(document).ready(function (event) {
       $(this).parent().remove();
     });*/
     const todo = {
-      id: $("#user_id").val(),
+      id: $("#user_id").text(),
       remind: $("#myInput").val(),
     };
 
