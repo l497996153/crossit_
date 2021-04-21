@@ -9,7 +9,7 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
-pool.connect()
+pool.connect();
 
 app
   .use(express.static(path.join(__dirname, 'public')))
@@ -23,6 +23,13 @@ app
     pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
       if (err) throw err;
       res.json(result.rows);
+    });
+  })
+  .post('/api/todos/:id', function(req, res) {
+    const todo = req.body;
+    pool.query("INSERT INTO users (title, user_id) VALUES ('"+todo.title+"','"+todo.id+"');", function (err, result) {
+      if (err) throw err;
+      res.sendStatus(201);
     });
   })
   .post("/login", async (req, res) => {

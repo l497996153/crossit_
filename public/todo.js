@@ -4,10 +4,15 @@ $(document).ready(function (event) {
       $.get("/api/todos/"+$("#id").val(), function(todos) {
           let $list = $("#todoList");
           $list.html("");
-          todos.forEach(function(todo) {
-              $list.append('<li><span class="delete"></span>' + 
-              todo.remind + '</li>')
-          });
+          if(todos.length>0){
+            todos.forEach(function(todo) {
+                $list.append('<li><span class="delete"></span>' + 
+                todo.title + '</li>')
+            });
+            $("#todoList li span").click(function (event) {
+              $(this).parent().remove();
+            });
+          }
       });
   }
   
@@ -32,10 +37,28 @@ $(document).ready(function (event) {
   });
 
   $(".addBtn").click(function (event) {
-    let title = $("#myInput").val();
+    /*let title = $("#myInput").val();
     $("#todoList").append('<li><span class="delete"></span>' + title + "</li>");
     $("#todoList li span").click(function (event) {
       $(this).parent().remove();
+    });*/
+    const todos = {
+      id: $("#id").val(),
+      title: $("#myInput").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/api/entrees",
+      data: JSON.stringify(entree),
+      contentType: "application/json"
+    }).done(function(data) {
+      // Reset the form after saving the entree
+      $("#myInput").html("");
+      getAllTodos();
+    }).fail(function(jqXHR) {
+      console.log("error")
+      //$("#error").html("The todo could not be added.");
     });
   });
 
