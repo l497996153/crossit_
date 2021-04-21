@@ -50,7 +50,7 @@ app
         pool.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
           if (err) throw err;
           if(result.length != 0){
-            let user_info = {username: result.rows[0].username, password: result.rows[0].password};
+            let user_info = {id: result.rows[0].id, username: result.rows[0].username, password: result.rows[0].password};
             console.log(result.rows[0].username + " successfully login");
             res.render('pages/todo', user_info);
           }
