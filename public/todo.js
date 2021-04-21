@@ -1,7 +1,7 @@
 $(document).ready(function (event) {
   getAllTodos();
   function getAllTodos() {
-      $.get("/api/todos/"+$("#id").val(), function(todos) {
+      $.get("/api/todos/"+$("#user_id").val(), function(todos) {
           let $list = $("#todoList");
           $list.html("");
           if(todos.length>0){
@@ -12,7 +12,7 @@ $(document).ready(function (event) {
             $("#todoList li span").click(function (event) {
               //$(this).parent().remove();
               const todo = {
-                id: $("#id").val(),
+                id: $("#user_id").val(),
                 remind: $("#myInput").val(),
               };
               $.ajax({
@@ -59,7 +59,7 @@ $(document).ready(function (event) {
       $(this).parent().remove();
     });*/
     const todo = {
-      id: $("#id").val(),
+      id: $("#user_id").val(),
       remind: $("#myInput").val(),
     };
 
