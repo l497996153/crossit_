@@ -20,10 +20,11 @@ app
     res.sendFile(path.join(__dirname + '/index.html'));
   })
   .get('/api/todos/:id', function(req, res) {
-    pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
+    const result = pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
       if (err) throw err;
-      res.json(result.rows);
+      return result
     });
+    res.json(result.rows);
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
