@@ -25,6 +25,7 @@ app
       if (err) throw err;
       return result;
     });
+    console.log(result);
     if (result == null)
       res.json([]);
     else

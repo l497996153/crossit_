@@ -5,6 +5,7 @@ $(document).ready(function (event) {
     $.get("/api/todos/"+id, function(todos) {
         let $list = $("#todoList");
         $list.html("");
+        console.log(todos);
         if(todos.length > 0){
           todos.forEach(function(todo) {
               $list.append('<li><span class="delete"></span>' + 
