@@ -5,6 +5,7 @@ $(document).ready(function (event) {
     alert(pass);
     alert(confirm);
     if (pass != confirm) {
+      alert("here");
       event.preventDefault();
       $("#errmsg").text("Password does not match");
     }
