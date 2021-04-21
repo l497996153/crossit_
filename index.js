@@ -57,7 +57,7 @@ app
       try {
         pool.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
           if (err) throw err;
-          if(result != null){
+          if(result.rows.length != 0){
             let user_info = {id: result.rows[0].id, username: result.rows[0].username, password: result.rows[0].password};
             console.log(result.rows[0].username + " successfully login");
             console.log("id: " + result.rows[0].id);
@@ -84,9 +84,9 @@ app
     const username = req.body.username;
     const password = req.body.password;
     if (validateLogin(req.body.username, req.body.password)) {
-      pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err) {
+      pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err, result) {
         if (err) throw err;
-        if(result != null){
+        if(result.rows.length != 0){
           pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
           pool.query("SELECT id FROM users WHERE username = '" + req.body.username + "';", function (err) {
             if (err) throw err;
