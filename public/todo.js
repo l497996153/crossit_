@@ -7,13 +7,13 @@ $(document).ready(function (event) {
           if(todos.length>0){
             todos.forEach(function(todo) {
                 $list.append('<li><span class="delete"></span>' + 
-                todo.title + '</li>')
+                todo.remind + '</li>')
             });
             $("#todoList li span").click(function (event) {
               //$(this).parent().remove();
               const todo = {
                 id: $("#id").val(),
-                title: $("#myInput").val(),
+                remind: $("#myInput").val(),
               };
               $.ajax({
                 type: "DELETE",
@@ -60,7 +60,7 @@ $(document).ready(function (event) {
     });*/
     const todo = {
       id: $("#id").val(),
-      title: $("#myInput").val(),
+      remind: $("#myInput").val(),
     };
 
     $.ajax({
