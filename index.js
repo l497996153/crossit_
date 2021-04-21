@@ -89,14 +89,8 @@ app
       pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err, result) {
         if (err) throw err;
         if(result.rows.length == 0){
-          pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');", function (err) {
-            if (err) throw err;
-            pool.query("SELECT id FROM users WHERE username = '" + req.body.username + "';", function (err) {
-              if (err) throw err;
-              let user_info = {id: result.rows[0].id, username: req.body.username, password: req.body.password};
-              res.render('pages/login');
-            });
-          });
+          pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
+          res.render('pages/login');
         }
         else{
           let error = {error: "username is used"};
