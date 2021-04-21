@@ -28,7 +28,10 @@ app
     res.sendFile(path.join(__dirname + '/index.html'));
   })
   .get('/api/todos/:id', function(req, res) {
-    const result = pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";");
+    const result = pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
+      if (err) throw err;
+      console.log("id:" + req.params.id);
+    });
     console.log(result.rows);
     if (result == null)
       res.json([]);
