@@ -27,16 +27,16 @@ app
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
-    pool.query("INSERT INTO todos (remind, user_id) VALUES ('"+todo.remind+"',"+todo.id+");", function (err, result) {
+    pool.query("INSERT INTO todos (remind, user_id) VALUES ('"+todo.remind+"',"+todo.id+");", function (err) {
       if (err) throw err;
-      res.sendStatus(201);
     });
+    res.sendStatus(201);
   })
   .delete('/api/todos', function(req, res) {
     pool.query("DELETE FROM todos WHERE remind = '"+todo.remind+"' AND user_id="+todo.id+";", function (err, result) {
       if (err) throw err;
-      res.sendStatus(204);
     });
+    res.sendStatus(204);
     /*else{
       res.sendStatus(404);
     }*/
