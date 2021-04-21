@@ -45,6 +45,8 @@ app
   })
   .delete('/api/todos', function(req, res) {
     const todo = req.body;
+    console.log("id    : "+ todo.id);
+    console.log("remind: "+ todo.remind);
     pool.query("DELETE FROM todos WHERE user_id = "+todo.id+" AND remind = '"+todo.remind+"';", function (err) {
       if (err) throw err;
       res.sendStatus(204);
@@ -86,7 +88,7 @@ app
     if (validateLogin(req.body.username, req.body.password)) {
       pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err, result) {
         if (err) throw err;
-        if(result.rows.length != 0){
+        if(result.rows.length == 0){
           pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
           pool.query("SELECT id FROM users WHERE username = '" + req.body.username + "';", function (err) {
             if (err) throw err;
