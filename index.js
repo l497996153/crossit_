@@ -44,6 +44,7 @@ app
     });
   })
   .delete('/api/todos', function(req, res) {
+    const todo = req.body;
     pool.query("DELETE FROM todos WHERE user_id = "+todo.id+" AND remind = '"+todo.remind+"';", function (err) {
       if (err) throw err;
       res.sendStatus(204);
@@ -56,7 +57,7 @@ app
       try {
         pool.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
           if (err) throw err;
-          if(result.length != 0){
+          if(result.rows.length != 0){
             let user_info = {id: result.rows[0].id, username: result.rows[0].username, password: result.rows[0].password};
             console.log(result.rows[0].username + " successfully login");
             console.log("id: " + result.rows[0].id);
