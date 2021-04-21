@@ -2,10 +2,10 @@ $(document).ready(function (event) {
   getAllTodos();
   function getAllTodos() {
     let id = $("#user_id").text();
-    console.log("id: " + id);
     $.get("/api/todos/"+id, function(todos) {
         let $list = $("#todoList");
         $list.html("");
+        console.log(todo);
         if(todos.length > 0){
           todos.forEach(function(todo) {
               $list.append('<li><span class="delete"></span>' + 

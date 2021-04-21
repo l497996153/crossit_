@@ -24,7 +24,7 @@ app
       if (err) throw err;
       return result;
     });
-    if (result == undefined)
+    if (result == null)
       res.json([]);
     else
       res.json(result.rows);
