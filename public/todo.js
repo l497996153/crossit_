@@ -10,7 +10,23 @@ $(document).ready(function (event) {
                 todo.title + '</li>')
             });
             $("#todoList li span").click(function (event) {
-              $(this).parent().remove();
+              //$(this).parent().remove();
+              const todo = {
+                id: $("#id").val(),
+                title: $("#myInput").val(),
+              };
+              $.ajax({
+                type: "DELETE",
+                url: "/api/todos",
+                data: JSON.stringify(todo),
+      contentType: "application/json"
+              }).done(function(data) {
+                // Successfully deleted entree
+                getAllTodos();
+              }).fail(function(jqXHR) {
+                console.log("error")
+                //$("#error").html("The entree could not be deleted.");
+              });
             });
           }
       });

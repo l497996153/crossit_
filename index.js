@@ -20,17 +20,26 @@ app
     res.sendFile(path.join(__dirname + '/index.html'));
   })
   .get('/api/todos/:id', function(req, res) {
-    pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
+    pool.query("SELECT * FROM todos WHERE user_id = '" + req.params.id + "';", function (err, result) {
       if (err) throw err;
       res.json(result.rows);
     });
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
-    pool.query("INSERT INTO users (title, user_id) VALUES ('"+todo.title+"','"+todo.id+"');", function (err, result) {
+    pool.query("INSERT INTO todos (title, user_id) VALUES ('"+todo.title+"','"+todo.id+"');", function (err, result) {
       if (err) throw err;
       res.sendStatus(201);
     });
+  })
+  .delete('/api/todos', function(req, res) {
+    pool.query("DELETE FROM todos WHERE title = '"+todo.title+"' AND user_id='"+todo.id+"';", function (err, result) {
+      if (err) throw err;
+      res.sendStatus(204);
+    });
+    /*else{
+      res.sendStatus(404);
+    }*/
   })
   .post("/login", async (req, res) => {
     const username = req.body.username;
