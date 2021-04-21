@@ -25,7 +25,7 @@ app
       res.json(result.rows);
     });
   })
-  .post('/api/todos/:id', function(req, res) {
+  .post('/api/todos', function(req, res) {
     const todo = req.body;
     pool.query("INSERT INTO users (title, user_id) VALUES ('"+todo.title+"','"+todo.id+"');", function (err, result) {
       if (err) throw err;

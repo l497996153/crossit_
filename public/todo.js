@@ -42,15 +42,15 @@ $(document).ready(function (event) {
     $("#todoList li span").click(function (event) {
       $(this).parent().remove();
     });*/
-    const todos = {
+    const todo = {
       id: $("#id").val(),
       title: $("#myInput").val(),
     };
 
     $.ajax({
       type: "POST",
-      url: "/api/entrees",
-      data: JSON.stringify(entree),
+      url: "/api/todos",
+      data: JSON.stringify(todo),
       contentType: "application/json"
     }).done(function(data) {
       // Reset the form after saving the entree
