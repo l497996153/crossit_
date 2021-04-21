@@ -69,6 +69,10 @@ hr {
   height: 25%;
 }
 
-#error{
+#error {
+  color: red;
+}
+
+#errmsg {
   color: red;
 }
