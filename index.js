@@ -52,6 +52,7 @@ app
           if(result.length != 0){
             let user_info = {id: result.rows[0].id, username: result.rows[0].username, password: result.rows[0].password};
             console.log(result.rows[0].username + " successfully login");
+            console.log("id: " + result.rows[0].id);
             res.render('pages/todo', user_info);
           }
           else{
