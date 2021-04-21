@@ -83,7 +83,7 @@ app
     }
   })
   .post("/signUp", async (req, res) => {
-    if (validateLogin(req.body.username, req.body.password, req.body.psw-confirmed)) {
+    if (validateLogin(req.body.username, req.body.password)) {
       pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err, result) {
         if (err) throw err;
         if(result.rows.length == 0){
@@ -106,11 +106,9 @@ app
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
-function validateLogin(username, password, confirm) {
+function validateLogin(username, password) {
     let valid = false;
-    if (username.length != 0 
-        && password.length != 0
-        && password == confirm){
+    if (username.length != 0 && password.length != 0){
         valid = true;
     }
     return valid;
