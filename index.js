@@ -16,6 +16,7 @@ app
   .use(express.urlencoded({extended: true}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
+  .use(express.json())
   .get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
   })
