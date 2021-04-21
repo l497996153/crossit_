@@ -25,7 +25,7 @@ app
   .set('view engine', 'ejs')
   .use(express.json())
   .get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/login.html'));
   })
   .get('/api/todos/:id', function(req, res) {
     pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
@@ -68,7 +68,7 @@ app
           else{
             let error = {error: "username or password wrong"};
             console.log('username or password wrong');
-            res.render('pages/login',error);
+            res.render('pages/login_fail',error);
           }
         });
       } catch (err) {
@@ -79,7 +79,7 @@ app
     else{
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
-      res.render('pages/login',error);
+      res.render('pages/login_fail',error);
     }
   })
   .post("/signUp", async (req, res) => {
@@ -90,12 +90,12 @@ app
         if (err) throw err;
         if(result.rows.length == 0){
           pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
-          res.render('pages/login');
+          res.sendFile(path.join(__dirname + '/public/configuremenu.html'));
         }
         else{
           let error = {error: "username is used"};
           console.log("username is used");
-          res.render('pages/signup',error);
+          res.render('pages/signup_fail',error);
         }
       });
       /*if(result){
@@ -116,7 +116,7 @@ app
     else{
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
-      res.render('pages/signup',error);
+      res.render('pages/signup_fail',error);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
