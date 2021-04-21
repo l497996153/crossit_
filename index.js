@@ -83,8 +83,6 @@ app
     }
   })
   .post("/signUp", async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
     if (validateLogin(req.body.username, req.body.password)) {
       pool.query("SELECT username FROM users WHERE username = '" + req.body.username + "';", function (err, result) {
         if (err) throw err;
@@ -98,20 +96,6 @@ app
           res.render('pages/signup_fail',error);
         }
       });
-      /*if(result){
-        await pool.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
-        let id = pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
-          if (err) throw err;
-          return result.rows[0].id;
-        });
-        let user_info = {id: id, username: username, password: password};
-        res.render('pages/todo', user_info);
-      }
-      else{
-        let error = {error: "username is used"};
-        console.log("username is used");
-        res.render('pages/signup_fail',error);
-      }*/
     }
     else{
       let error = {error: "not valid username or password"};

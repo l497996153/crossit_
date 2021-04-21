@@ -16,7 +16,7 @@ $(document).ready(function(event) {
     // Validation for customer name
     $("#username, #password").keyup(function () {
         if(rtnError){
-            $("#error").val("Please enter username and password!");
+            $("#error").html("Please enter username and password!");
             rtnError = false;
         }
         $("#error").hide();

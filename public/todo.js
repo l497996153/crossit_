@@ -12,7 +12,6 @@ $(document).ready(function (event) {
               todo.remind + '</li>')
           });
           $("#todoList li span").click(function (event) {
-            //$(this).parent().remove();
             console.log("span: "+$(this).parent().text());
             const todo = {
               id: $("#user_id").text(),
@@ -28,7 +27,6 @@ $(document).ready(function (event) {
               getAllTodos();
             }).fail(function(jqXHR) {
               console.log("error")
-              //$("#error").html("The entree could not be deleted.");
             });
           });
         }
@@ -41,10 +39,6 @@ $(document).ready(function (event) {
     } else {
       $(".dropdown-menu").css("display", "block");
     }
-  });
-
-  $("#todoList li span").click(function (event) {
-    $(this).parent().remove();
   });
 
   $("#addTask").click(function (event) {
