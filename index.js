@@ -9,7 +9,7 @@ const pool = new Pool({
     rejectUnauthorized: false,
   },
 });
-const client = pool.connect()
+const client = pool.connect();
 
 app
   .use(express.static(path.join(__dirname, 'public')))
