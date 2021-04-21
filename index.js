@@ -22,10 +22,10 @@ app
   .get('/api/todos/:id', function(req, res) {
     const result = pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
       if (err) throw err;
-      return result
+      return result;
     });
-    console.log(result.rows);
-    res.json(result.rows);
+    console.log(result);
+    res.json(result);
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
