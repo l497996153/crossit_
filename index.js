@@ -68,7 +68,7 @@ app
           else{
             let error = {error: "username or password wrong"};
             console.log('username or password wrong');
-            res.render('pages/login_fail',error);
+            res.render('pages/login',error);
           }
         });
       } catch (err) {
@@ -79,7 +79,7 @@ app
     else{
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
-      res.render('pages/login_fail',error);
+      res.render('pages/login',error);
     }
   })
   .post("/signUp", async (req, res) => {
@@ -94,14 +94,14 @@ app
             pool.query("SELECT id FROM users WHERE username = '" + req.body.username + "';", function (err) {
               if (err) throw err;
               let user_info = {id: result.rows[0].id, username: req.body.username, password: req.body.password};
-              res.render('pages/todo', user_info);
+              res.render('pages/login');
             });
           });
         }
         else{
           let error = {error: "username is used"};
           console.log("username is used");
-          res.render('pages/signup_fail',error);
+          res.render('pages/signup',error);
         }
       });
       /*if(result){
@@ -122,7 +122,7 @@ app
     else{
       let error = {error: "not valid username or password"};
       console.log("not valid username or password");
-      res.render('pages/signup_fail',error);
+      res.render('pages/signup',error);
     }
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
