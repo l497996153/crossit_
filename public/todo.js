@@ -3,8 +3,8 @@ $(document).ready(function (event) {
   function getAllTodos() {
       $.get("/api/todos/"+$("#user_id").val(), function(todos) {
           let $list = $("#todoList");
-          $list.html("");
-          if(todos.length>0){
+          $list.empty();
+          if(todos.length > 0){
             todos.forEach(function(todo) {
                 $list.append('<li><span class="delete"></span>' + 
                 todo.remind + '</li>')
@@ -19,7 +19,7 @@ $(document).ready(function (event) {
                 type: "DELETE",
                 url: "/api/todos",
                 data: JSON.stringify(todo),
-      contentType: "application/json"
+                contentType: "application/json"
               }).done(function(data) {
                 // Successfully deleted entree
                 getAllTodos();
