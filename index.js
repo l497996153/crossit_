@@ -24,8 +24,10 @@ app
       if (err) throw err;
       return result;
     });
-    console.info(result);
-    res.json(result);
+    if (result == undefined)
+      res.json([]);
+    else
+      res.json(result.rows);
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
