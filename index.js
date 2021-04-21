@@ -46,6 +46,7 @@ app
     const password = req.body.password;
     if (validateLogin(username, password)) {
       try {
+        pool.connect();
         pool.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"';", function (err, result) {
           if (err) throw err;
           if(result.length != 0){
