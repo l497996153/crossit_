@@ -84,7 +84,11 @@ app
         });
         if(result){
           await pool.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
-          let user_info = {username: username, password: password};
+          let id = () => pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
+            if (err) throw err;
+            return result.rows[0].id;
+          });
+          let user_info = {id: id, username: username, password: password};
           res.render('pages/todo', user_info);
         }
         else{
