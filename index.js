@@ -21,10 +21,10 @@ app
     res.sendFile(path.join(__dirname + '/index.html'));
   })
   .get('/api/todos/:id', function(req, res) {
-    const result = () => pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
+    const result = (() => {pool.query("SELECT * FROM todos WHERE user_id = " + req.params.id + ";", function (err, result) {
       if (err) throw err;
       return result;
-    });
+    })})();
     console.log(result);
     if (result == null)
       res.json([]);
@@ -79,18 +79,18 @@ app
     const password = req.body.password;
     if (validateLogin(username, password)) {
       try {
-        const result = () => pool.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
+        const result = (() => {pool.query("SELECT username FROM users WHERE username = '" + username + "';", function (err) {
           if (err) throw err;
           if(result.length != 0){
             return true;
           }
-        });
+        })})();
         if(result){
           await pool.query("INSERT INTO users (username, password) VALUES ('"+username+"','"+password+"');");
-          let id = () => pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
+          let id = (() => {pool.query("SELECT id FROM users WHERE username = '" + username + "';", function (err) {
             if (err) throw err;
             return result.rows[0].id;
-          });
+          })})();
           let user_info = {id: id, username: username, password: password};
           res.render('pages/todo', user_info);
         }
