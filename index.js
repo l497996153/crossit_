@@ -24,6 +24,7 @@ app
       if (err) throw err;
       return result
     });
+    console.log(result.rows);
     res.json(result.rows);
   })
   .post('/api/todos', function(req, res) {
