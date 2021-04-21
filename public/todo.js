@@ -1,35 +1,37 @@
 $(document).ready(function (event) {
   getAllTodos();
   function getAllTodos() {
-      $.get("/api/todos/"+$("#user_id").val(), function(todos) {
-          let $list = $("#todoList");
-          $list.empty();
-          if(todos.length > 0){
-            todos.forEach(function(todo) {
-                $list.append('<li><span class="delete"></span>' + 
-                todo.remind + '</li>')
+    let id = $("#user_id").val();
+    console.log("id: " + id);
+    $.get("/api/todos/"+id, function(todos) {
+        let $list = $("#todoList");
+        $list.empty();
+        if(todos.length > 0){
+          todos.forEach(function(todo) {
+              $list.append('<li><span class="delete"></span>' + 
+              todo.remind + '</li>')
+          });
+          $("#todoList li span").click(function (event) {
+            //$(this).parent().remove();
+            const todo = {
+              id: $("#user_id").val(),
+              remind: $("#myInput").val(),
+            };
+            $.ajax({
+              type: "DELETE",
+              url: "/api/todos",
+              data: JSON.stringify(todo),
+              contentType: "application/json"
+            }).done(function(data) {
+              // Successfully deleted entree
+              getAllTodos();
+            }).fail(function(jqXHR) {
+              console.log("error")
+              //$("#error").html("The entree could not be deleted.");
             });
-            $("#todoList li span").click(function (event) {
-              //$(this).parent().remove();
-              const todo = {
-                id: $("#user_id").val(),
-                remind: $("#myInput").val(),
-              };
-              $.ajax({
-                type: "DELETE",
-                url: "/api/todos",
-                data: JSON.stringify(todo),
-                contentType: "application/json"
-              }).done(function(data) {
-                // Successfully deleted entree
-                getAllTodos();
-              }).fail(function(jqXHR) {
-                console.log("error")
-                //$("#error").html("The entree could not be deleted.");
-              });
-            });
-          }
-      });
+          });
+        }
+    });
   }
   
   $("#menuButton").click(function (event) {
