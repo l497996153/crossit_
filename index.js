@@ -90,7 +90,7 @@ app
         if (err) throw err;
         if(result.rows.length == 0){
           pool.query("INSERT INTO users (username, password) VALUES ('"+req.body.username+"','"+req.body.password+"');");
-          res.sendFile(path.join(__dirname + '/public/configuremenu.html'));
+          res.sendFile(path.join(__dirname + '/public/login.html'));
         }
         else{
           let error = {error: "username is used"};

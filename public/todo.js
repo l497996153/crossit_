@@ -13,10 +13,10 @@ $(document).ready(function (event) {
           });
           $("#todoList li span").click(function (event) {
             //$(this).parent().remove();
-            console.log("span: "+$(this).text());
+            console.log("span: "+$(this).parent().text());
             const todo = {
               id: $("#user_id").text(),
-              remind: $(this).text(),
+              remind: $(this).parent().text(),
             };
             $.ajax({
               type: "DELETE",
