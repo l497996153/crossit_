@@ -15,7 +15,7 @@ $(document).ready(function (event) {
             //$(this).parent().remove();
             const todo = {
               id: $("#user_id").text(),
-              remind: $("#myInput").val(),
+              remind: $(this).val(),
             };
             $.ajax({
               type: "DELETE",
