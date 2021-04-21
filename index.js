@@ -31,15 +31,11 @@ app
   })
   .post('/api/todos', function(req, res) {
     const todo = req.body;
-    pool.query("INSERT INTO todos (remind, user_id) VALUES ('"+todo.remind+"',"+todo.id+");", function (err) {
-      if (err) throw err;
-    });
+    pool.query("INSERT INTO todos (user_id, remind) VALUES ("+todo.id+",'"+todo.remind+"');");
     res.sendStatus(201);
   })
   .delete('/api/todos', function(req, res) {
-    pool.query("DELETE FROM todos WHERE remind = '"+todo.remind+"' AND user_id="+todo.id+";", function (err, result) {
-      if (err) throw err;
-    });
+    pool.query("DELETE FROM todos WHERE remind = '"+todo.remind+"' AND user_id="+todo.id+";");
     res.sendStatus(204);
     /*else{
       res.sendStatus(404);
