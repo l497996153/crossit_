@@ -34,6 +34,7 @@
           <input
             type="password"
             placeholder="Confirm Password"
+            id="co-password"
             name="psw-confirmed"
             required
           />
@@ -42,9 +43,10 @@
             By creating an account you agree<a href="#" style="color: dodgerblue"></a> to sell your data to third
             company (Just a joke)</a>.
           </p>
-          <label id="error">"<%= error %>"</label>
+
           <div class="clearfix">
             <input type="submit" id="signupbtn" value="Sign Up" />
+            <p id="errmsg"><%= error %></p>
           </div>
         </div>
       </form>
