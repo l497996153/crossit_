@@ -71,7 +71,7 @@ $(document).ready(function (event) {
     })
       .done(function (data) {
         // Reset the form after saving the entree
-        $("#myInput").html("");
+        $("#myInput").text("");
         getAllTodos();
       })
       .fail(function (jqXHR) {
