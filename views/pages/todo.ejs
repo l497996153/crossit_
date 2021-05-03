@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>XXX List</title>
+    <title id="title"><%= username %>'s' List</title>
     <link href="img/cross.svg" type="image/x-icon" rel="shortcut icon" />
     <link href="css/todo.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -11,7 +11,9 @@
   <body>
     <!----------------------------Header---------------------------->
     <!--<div id="menuDiv" href=""></div>-->
-    <header><span id="user_id" hidden><%= id %></span>Hi, <%= username %></header>
+    <header>
+      <span id="user_id" hidden><%= id %></span>Hi, <%= username %>
+    </header>
     <!----------------------------Center---------------------------->
     <div id="container">
       <nav id="leftNavigation" hidden>
@@ -25,14 +27,10 @@
         </div>
       </nav>
       <main id="image">
-        <ul id="todoList">
-        </ul>
+        <ul id="todoList"></ul>
       </main>
       <aside id="list">
-        <ul id="teamList">
-          <li><img src="img/sample.png" class="teamMem" /></li>
-          <li><img src="img/sample2.jpg" class="teamMem" /></li>
-        </ul>
+        <ul id="teamList"></ul>
       </aside>
     </div>
     <!----------------------------Footer---------------------------->
